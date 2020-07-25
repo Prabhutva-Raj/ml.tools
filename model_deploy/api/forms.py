@@ -16,12 +16,12 @@ class RunForm(forms.Form):
         df = pd.read_csv(self.CSV_FILE)
 
 
-    def clean_task(self):
+    def check_task(self):
         if self.TASK == "0":
           raise forms.ValidationError("Please choose a Task.")
         return True #self.TASK
 
-    def clean_csv(self):
+    def check_csv(self):
         try:
             global df, noOfCols
             noOfCols = len(df.columns)
@@ -31,7 +31,7 @@ class RunForm(forms.Form):
         return True #self.CSV_FILE
 
 
-    def clean_depvar(self):
+    def check_depvar(self):
         if (int)(self.DEP_VAR) >= noOfCols:
             raise forms.ValidationError("Please enter a valid column."+self.DEP_VAR+" "+str(noOfCols))
         else:
@@ -40,7 +40,7 @@ class RunForm(forms.Form):
 
     def is_valid(self):
         global df
-        if self.clean_csv() and self.clean_depvar() and self.clean_task() :
+        if self.check_csv() and self.check_depvar() and self.check_task() :
             return {1:df,2:True}
         else:
             return {1:None,2:False}
