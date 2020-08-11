@@ -7,23 +7,20 @@ $(document).ready(function() {
 
 function select_ops(cols)
 {
-  var t = document.getElementById("dvCSV");
-  t.innerHTML = cols.length;
-
   var newSelect1 = document.getElementById("select_indep");
-  var newSelect2 = document.getElementById("select_dep");
   for(var i=0;i<cols.length;i++)
   {
    var opt = document.createElement("option");
    opt.value= i;
-   opt.innerHTML =cols[i]; // whatever property it has
+   opt.innerHTML =cols[i];
 
-   // then append it to the select element
-   newSelect1.add(opt);
-   newSelect2.add(opt);
+   //append it to the select element
+   newSelect1.add(opt,undefined);
+
   }
 
-  var elmnt = document.getElementById("submit");
+  alert("Columns of uploaded csv file are:\n"+cols)
+  var elmnt = document.getElementById("process");
   elmnt.scrollIntoView();
 
 }
