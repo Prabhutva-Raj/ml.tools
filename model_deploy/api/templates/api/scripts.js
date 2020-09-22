@@ -1,30 +1,35 @@
 $(document).ready(function() {
   $('select').material_select();
-   $('.sidenav-trigger').sidenav();
+});
 
- });
 
+$.myjQuery=function(cols)
+{
+  $('.select').material_select();
+  // setup listener for custom event to re-initialize on change
+  $('select').on('contentChanged', function() {
+    $(this).material_select();
+  });
+
+  for(var i=0;i<cols.length;i++)
+  {
+    var $newOpt_indep = $("<option>").attr("value",i).text(cols[i])
+    var $newOpt_dep = $("<option>").attr("value",i).text(cols[i])
+    $("#select_indep").append($newOpt_indep);
+    $("#select_dep").append($newOpt_dep);
+
+    // fire custom event anytime you've updated select
+    $("#select_indep").trigger('contentChanged');
+    $("#select_dep").trigger('contentChanged');
+  }
+}
 
 function select_ops(cols)
 {
-  var newSelect1 = document.getElementById("select_indep");
-  for(var i=0;i<cols.length;i++)
-  {
-   var opt = document.createElement("option");
-   opt.value= i;
-   opt.innerHTML =cols[i];
-
-   //append it to the select element
-   newSelect1.add(opt,undefined);
-
-  }
-
-  alert("Columns of uploaded csv file are:\n"+cols)
+  $.myjQuery(cols);
   var elmnt = document.getElementById("process");
   elmnt.scrollIntoView();
-
 }
-
 
 
 var input = document.getElementById("fileUpload");
@@ -48,7 +53,6 @@ function Upload(event)
             }
 
      }
-
      else
      {
          alert("This browser does not support HTML5.");

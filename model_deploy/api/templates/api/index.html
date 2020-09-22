@@ -32,13 +32,11 @@
           </div>
           </div>
 
-          <div id="dvCSV">
-          </div>
 
           <div class="row">
             <div class="input-field col s4">
               <select name="task" id="task" required>
-                <option disabled>Select your Task</option>
+                <option disabled selected>Select your Task</option>
                 <option value="1">Regression</option>
                 <option value="2">Classification</option>
                 <option value="3">Clustering</option>
@@ -47,15 +45,15 @@
             </div>
 
             <div class="input-field col s4">
-              <select id="select_indep" name="indep_vars" multiple="True">
-                <option value="default">default</option>
+              <select multiple id="select_indep" name="indep_vars" required>
+                <option disabled selected>default</option>
               </select>
               <label>Independent Variables</label>
             </div>
 
             <div class="input-field col s4" >
-              <select id="select_dep" name="dep_vars" >
-                <option value="default">default</option>
+              <select id="select_dep" name="dep_var" >
+                <option disabled selected>default</option>
               </select>
               <label>Dependent Variable</label>
             </div>
