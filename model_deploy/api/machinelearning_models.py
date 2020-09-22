@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -8,12 +7,12 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-def comp_regressions(df,dv):
+def comp_regressions(df,dv,idv):
     pass
 
-def comp_classifications(df,dv):
-    x = df.iloc[:,[2,3]].values     #[i for i in range(1,int(dv))]+[i for i in range(int(dv)+1,len(df.columns))]
-    y = df.iloc[:,int(dv)].values
+def comp_classifications(df,dv,idv):
+    x = df.iloc[:,[int(idv[0])]].values     #[i for i in range(1,int(dv))]+[i for i in range(int(dv)+1,len(df.columns))]
+    y = df.iloc[:,dv].values
 
     '''Splitting dataset into training and testing set'''
     from sklearn.model_selection import train_test_split
@@ -51,12 +50,12 @@ def comp_classifications(df,dv):
 def comp_clusterings(csv,dv):
     pass
 
-def runmodels(p_datacsv, p_depvars, p_task):
+def runmodels(p_task, p_datacsv, p_depvars, p_indepvars):
     if p_task=="1":
-        return comp_regressions(p_datacsv,p_depvars)
+        return comp_regressions(p_datacsv,p_depvars,p_indepvars)
     elif p_task=="2":
-        return comp_classifications(p_datacsv,p_depvars)
+        return comp_classifications(p_datacsv,p_depvars,p_indepvars)
     elif p_task=="3":
-        return comp_clusterings(p_datacsv,p_depvars)
+        return comp_clusterings(p_datacsv,p_depvars,p_indepvars)
     else:
         raise Exception("There can be no exception. "+"Arguments: ", p_datacsv, p_depvars, p_task)

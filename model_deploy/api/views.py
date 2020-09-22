@@ -41,10 +41,14 @@ def run(request):
     #'''
     dictt = robj.is_valid()
     if dictt[2]:
-        outputs = runmodels(dictt[1], robj.DEP_VAR, robj.TASK)
+        outputs = runmodels(robj.TASK, dictt[1], int(robj.DEP_VAR), list(map(int,robj.INDEP_VARS)))
     else:
         robj = RunForm()
     #'''
 
     #raise Exception("Accuracies: ",accuracies)
     return  render(request, 'api/Results.html', context={'data':outputs})
+
+
+def check(request):
+    return  render(request, 'api/check.html')
